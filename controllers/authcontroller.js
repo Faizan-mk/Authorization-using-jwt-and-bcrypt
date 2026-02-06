@@ -1,11 +1,15 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 const { usermodel } = require('../models/usermodel');
+const { schema } = require('../middleware/userschema');
 
 
 
 exports.register = async (req, res) => {
     try {
+       const{error}= schema.validate(req.body)
+       if(error) res.status(401).json({message:error.details[0].message})
+        
        const {username,email,password}=req.body;
        const hashpassword=await bcrypt.hash(password,10);
        const user=await usermodel.create({username,email,password:hashpassword})

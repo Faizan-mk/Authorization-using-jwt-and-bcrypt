@@ -14,7 +14,8 @@ const { sequelize } = require("../config/db");
     },
     password:{
         type:DataTypes.STRING,
-        allowNull:false
+        allowNull:false,
+       
     }
  },
 {
