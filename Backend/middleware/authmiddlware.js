@@ -21,7 +21,7 @@ exports.verifytoken = (req, res, next) => {
         if (!token) return res.status(401).json({ message: "token is required" })
 
         // Verify token signature and decode payload
-        const decode = jwt.verify(token, "secretkey");
+        const decode = jwt.verify(token, process.env.JWT_SECRET || "secretkey");
         // Attach decoded user information to request object
         req.user = decode;
         // Proceed to next middleware/route handler

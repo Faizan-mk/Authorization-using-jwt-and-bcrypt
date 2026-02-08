@@ -59,7 +59,7 @@ exports.login = async (req, res) => {
             return res.status(401).json({ message: "invalid email or password" })
         }
         // Generate JWT token with user id, valid for 1 hour
-        const token = jwt.sign({ userid: user.id }, "secretkey", { expiresIn: "1h" })
+        const token = jwt.sign({ userid: user.id }, process.env.JWT_SECRET || "secretkey", { expiresIn: "1h" })
         return res.status(200).json({ message: "login successful", token })
     } catch (error) {
         console.error(error)
