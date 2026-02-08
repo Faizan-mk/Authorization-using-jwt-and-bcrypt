@@ -17,8 +17,10 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const API_URL = import.meta.env.VITE_API_URL || "";
+
     try {
-      const response = await fetch("/api/register", {
+      const response = await fetch(`${API_URL}/api/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

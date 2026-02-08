@@ -4,6 +4,7 @@
  */
 
 const express = require('express')
+const cors = require('cors')
 const { db } = require('./config/db')
 const { authrouter } = require('./routes/authrouter')
 const { usermodel } = require('./models/usermodel')
@@ -12,6 +13,7 @@ const port = 3000
 
 // Middleware to parse incoming JSON requests
 app.use(express.json())
+app.use(cors()) // Allowing all origins for now, can be restricted later
 
 // Mount authentication routes at /api prefix
 app.use("/api", authrouter)

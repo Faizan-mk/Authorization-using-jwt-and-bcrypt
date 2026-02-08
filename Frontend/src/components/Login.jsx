@@ -12,8 +12,10 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const API_URL = import.meta.env.VITE_API_URL || "";
+
     try {
-      const response = await fetch("/api/login", {
+      const response = await fetch(`${API_URL}/api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -26,7 +28,7 @@ function Login() {
       if (response.ok) {
         localStorage.setItem("token", data.token);
 
-        const userRes = await fetch("/api/getuser", {
+        const userRes = await fetch(`${API_URL}/api/getuser`, {
           headers: {
             "Authorization": `Bearer ${data.token}`
           }
